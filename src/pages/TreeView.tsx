@@ -61,9 +61,9 @@ function TreeView() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12  mt-16"
     >
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Network Tree</h1>
+      <h1 className="text-3xl  font-bold text-gray-900 dark:text-white mb-8 text-center">Network Tree</h1>
 
       {/* Add User Button */}
       <div className="flex justify-center mb-6">
@@ -78,12 +78,13 @@ function TreeView() {
       </div>
 
       {/* ReactFlow Container */}
-      <div className="h-[500px] border border-gray-300 rounded-lg shadow-xl bg-white">
-        <ReactFlow nodes={nodes} edges={edges} onConnect={onConnect} nodeTypes={{ default: TreeNode }} fitView>
-          <Background variant="dots" gap={12} size={1} />
-          <Controls />
-        </ReactFlow>
-      </div>
+      <div className="h-[500px] border border-gray-300 rounded-lg shadow-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+  <ReactFlow nodes={nodes} edges={edges} onConnect={onConnect} nodeTypes={{ default: TreeNode }} fitView>
+    <Background variant="dots" gap={12} size={1} />
+    <Controls />
+  </ReactFlow>
+</div>
+
     </motion.div>
   );
 }
