@@ -11,6 +11,7 @@ import TreeView from './pages/TreeView';
 import Wallet from './pages/Wallet';
 import Profile from './pages/Profile';
 import { AuthProvider } from './context/AuthContext';
+import Admin from './pages/Admin';
 
 function App() {
   // Ensure dark mode is applied on mount
@@ -37,6 +38,7 @@ function App() {
               <Route path="/tree" element={<TreeView />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<Admin/>} />
             </Routes>
           </AnimatePresence>
           <Toaster position="top-center" />

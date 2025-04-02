@@ -5,29 +5,43 @@ import { Users, TrendingUp, Wallet } from "lucide-react";
 import Lottie from "lottie-react";
 import bannerAnimation from "../assets/bannerAnimation.json";
 import bannerAnimation1 from "../assets/supermarket.json";
-
+// import GradientStarsBg from "../assets/gradientStarsBg.png";
+import herob from "../assets/herob.png"
 function Home() {
   const navigate = useNavigate();
 
   return (
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  exit={{ opacity: 0 }}
-  className="min-h-screen pt-24 py-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center"
->
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen pt-24 py-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center"
+    >
       <div className="max-w-6xl w-full text-center">
         {/* Main Heading */}
-        <motion.h1
+        <motion.div
           initial={{ y: -20 }}
           animate={{ y: 0 }}
-          className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-6"
+          className="relative bg-cover bg-center rounded-lg py-16 mb-10 min-h-[400px]"
+          style={{
+            backgroundImage: `url(${herob})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
         >
-          Welcome to <span className="text-purple-600 dark:text-purple-400">MLM System</span>
-        </motion.h1>
-        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-10">
-          Join our community and start earning through referrals.
-        </p>
+          <div className="absolute inset-0 bg-black opacity-40 rounded-lg"></div>
+          <motion.h1
+            initial={{ y: -20 }}
+            animate={{ y: 0 }}
+            className="relative text-4xl sm:text-5xl font-extrabold text-white mb-6"
+          >
+            Welcome to <span className="text-purple-600 dark:text-purple-400">Saravana SuperMarket</span>
+          </motion.h1>
+          <p className="relative text-lg sm:text-xl text-gray-100 mb-10">
+            Join our community and start earning through referrals.
+          </p>
+        </motion.div>
 
         {/* 🎥 Lottie Animations & Button */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
@@ -38,7 +52,7 @@ function Home() {
             onClick={() => navigate("/register")}
             className="px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
           >
-            Join Now
+          Connect to money & Join Now
           </motion.button>
           <Lottie animationData={bannerAnimation1} className="w-64 sm:w-80 md:w-96" />
         </div>
