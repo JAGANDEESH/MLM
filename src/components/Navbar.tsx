@@ -1,26 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
+import logo from '../assets/logo.png'; // Assuming the logo is saved in assets folder
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(
-    localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
   const location = useLocation();
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
-
-  const toggleDarkMode = () => setIsDark((prev) => !prev);
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard' },
@@ -31,13 +17,13 @@ function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md shadow-md 
-      ${isDark ? 'bg-gradient-to-r from-[#0d0224] to-[#0e0427] text-gray-200' : 'bg-gradient-to-r from-[#100629] to-[#0c0123] text-white'}`}>
+    <nav className="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md shadow-md bg-gradient-to-r from-blue-50 to-indigo-100 text-gray-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-extrabold">
-            Saravana SuperMarket
+          <Link to="/" className="flex items-center space-x-2">
+            <img src={logo} alt="Logo" className="w-10 h-10" />
+            <span className="text-3xl font-bold text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text ">Saravana SuperMarket</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -47,26 +33,24 @@ function Navbar() {
                 key={item.path} 
                 to={item.path} 
                 className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all 
-                  ${location.pathname === item.path ? 'text-[#facc15] font-semibold' : 'hover:text-[#facc15]'}`}
+                  ${location.pathname === item.path ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600'}`}
               >
                 {item.name}
-                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#facc15] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
-            
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-            >
-              {isDark ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-gray-300" />}
-            </button>
+            {/* Profile Icon */}
+            <Link to="/profile">
+              <User className="w-6 h-6 text-gray-700 hover:text-indigo-600" />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <Link to="/profile">
+              <User className="w-6 h-6 text-gray-700 hover:text-indigo-600" />
+            </Link>
             <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-md">
-              {isOpen ? <X className="w-6 h-6 text-gray-300" /> : <Menu className="w-6 h-6 text-gray-300" />}
+              {isOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
             </button>
           </div>
         </div>
@@ -79,7 +63,7 @@ function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-16 left-0 w-full bg-gradient-to-r from-[#0e0427] to-[#0d0224] shadow-lg rounded-b-lg overflow-hidden"
+            className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-b-lg overflow-hidden"
           >
             <div className="flex flex-col items-center py-4 space-y-3">
               {navItems.map((item) => (
@@ -87,21 +71,13 @@ function Navbar() {
                   key={item.path}
                   to={item.path}
                   className={`block px-6 py-2 text-lg font-medium rounded-lg transition-all 
-                    ${location.pathname === item.path ? 'text-[#facc15] font-semibold' : 'hover:text-[#facc15]'}`}
+                    ${location.pathname === item.path ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600'}`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              
-              {/* Dark Mode Toggle in Mobile */}
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 mt-3 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-              >
-                {isDark ? <Sun className="w-6 h-6 text-yellow-500" /> : <Moon className="w-6 h-6 text-gray-300" />}
-              </button>
-            </div>
+            </div> 
           </motion.div>
         )}
       </AnimatePresence>

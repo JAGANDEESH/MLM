@@ -1,7 +1,16 @@
-import React from "react";
-  export const Card = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`p-4 rounded-lg shadow-md ${className || ""}`}>{children}</div>;
-  };
-export const CardContent = ({ children }: { children: React.ReactNode }) => {
-  return <div className="p-2">{children}</div>;
-};
+import { ReactNode } from 'react';
+
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export const Card = ({ children, className = '' }: CardProps) => (
+  <div className={`rounded-xl shadow-md overflow-hidden ${className}`}>
+    {children}
+  </div>
+);
+
+export const CardContent = ({ children }: { children: ReactNode }) => (
+  <div className="p-6">{children}</div>
+);
